@@ -66,12 +66,15 @@ FOREACH file IN files;
   END;
 END;
 %>
+<div class="modules">
 <% IF modules.size %><strong>Modules</strong>
 <% FOREACH module IN modules %>
-  <div>
-    <strong><a href="/module/<% IF release.status == 'latest'; module.title; ELSE; [release.author, release.name, module.path].join("/"); END %>"><% module.title %></a></strong><% IF module.abstract %> - <% module.abstract; END %>
+  <div class="row">
+    <div class="left"><a href="/module/<% IF release.status == 'latest'; module.title; ELSE; [release.author, release.name, module.path].join("/"); END %>"><% module.title %></a></div>
+    <div class="right"><% IF module.abstract %><% module.abstract; END %></div>
   </div>
 <% END %>
+</div>
 
 <br><% END %>
 <% IF documentation.size %><strong>Documentation</strong>

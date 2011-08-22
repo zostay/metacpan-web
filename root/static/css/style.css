@@ -619,6 +619,27 @@ body div.qtip div.content {
     padding: 0;
 }
 
+div.modules {
+    display: table;
+}
+
+div.modules div.row {
+    display: table-row;
+}
+
+div.modules div.row:nth-child(2n) {
+    background-color: #f5f5f5;
+}
+
+div.modules div.row div.left, div.modules div.row div.right {
+    display: table-cell;
+}
+
+div.modules div.row div.left {
+    font-weight: bold;
+    padding-right: 1em;
+}
+
 div.qtip-github table {
     width: 100%;
 }
