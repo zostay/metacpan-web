@@ -20,7 +20,15 @@ test_psgi app, sub {
     my $latest = $res->content;
     ok( $res = $cb->( GET $this ), "GET $this" );
     is($latest, $res->content, 'content of both urls is exactly the same');
-    
+
+    my $module
+        = '/module/flora/Data-Stream-Bulk-0.08/lib/Data/Stream/Bulk.pm';
+    ok( $res = $cb->( GET $module ), "GET $module" );
+    is( $res->code, 302, 'code 302' );
+    is( $res->header('Location'),
+        '/module/FLORA/Data-Stream-Bulk-0.08/lib/Data/Stream/Bulk.pm',
+        'redirect to upper case CPAN id'
+    );
 };
 
 done_testing;

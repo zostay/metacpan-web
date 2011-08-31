@@ -7,6 +7,14 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 sub index : PathPart('module') : Chained('/') : Args {
     my ( $self, $c, @module ) = @_;
+
+    # make sure the CPAN id is always uppercase
+    if ( @module > 1 && $module[0] ne uc( $module[0] ) ) {
+        $module[0] = uc $module[0];
+        $c->res->redirect( join '/', '/module', @module );
+        $c->detach;
+    }
+
     my $data
         = @module == 1
         ? $c->model('API::Module')->find(@module)->recv
