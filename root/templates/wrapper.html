@@ -30,16 +30,6 @@
   <%- IF rss %><link rel="alternate" type="application/rss+xml" title="RSS" href="http://metacpan.org/feed/<% rss %>" /><% END %>
   <link rel="search" href="/static/opensearch.xml" type="application/opensearchdescription+xml" title="MetaCPAN">
   <script src="<% req.env.item('psgix.assets').0 %>" type="text/javascript"></script>
-  <script type="text/javascript">
-  var pkBaseURL = (("https:" == document.location.protocol) ? "https://metacpan.org/piwik/" : "http://metacpan.org/piwik/");
-  document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
-  </script><script type="text/javascript">
-  try {
-  var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 1);
-  piwikTracker.trackPageView();
-  piwikTracker.enableLinkTracking();
-  } catch( err ) {}
-  </script>
 
     <% PROCESS wrapper/dev_css.html %>
     <!--
@@ -95,8 +85,6 @@
       Hosting generously<br>sponsored by <a href="http://speedchilli.com">speedchilli</a><br><a href="http://speedchilli.com"><img src="/static/images/speedchilli.png" width=150 height=32></a></td>
   </tr>
 </table>
-  <!-- Piwik --> 
-  <noscript><p><img src="http://metacpan.org/piwik/piwik.php?idsite=1" style="border:0" alt="" /></p></noscript>
-  <!-- End Piwik Tracking Code -->
+    <% PROCESS wrapper/piwi_tracking.html %>
   </body>
 </html>
