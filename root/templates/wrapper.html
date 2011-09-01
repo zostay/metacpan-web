@@ -28,7 +28,6 @@
 <head>
   <title><% IF title; title; ELSE; 'Search the CPAN'; END %> - metacpan.org</title>
   <%- IF rss %><link rel="alternate" type="application/rss+xml" title="RSS" href="http://metacpan.org/feed/<% rss %>" /><% END %>
-  <link href="<% req.env.item('psgix.assets').1 %>" rel="stylesheet" type="text/css">
   <link rel="search" href="/static/opensearch.xml" type="application/opensearchdescription+xml" title="MetaCPAN">
   <script src="<% req.env.item('psgix.assets').0 %>" type="text/javascript"></script>
   <script type="text/javascript">
@@ -41,6 +40,11 @@
   piwikTracker.enableLinkTracking();
   } catch( err ) {}
   </script>
+
+    <% PROCESS wrapper/dev_css.html %>
+    <!--
+    <link href="<% req.env.item('psgix.assets').1 %>" rel="stylesheet" type="text/css">
+    -->
 </head>
 <body>
   <div class="header">
