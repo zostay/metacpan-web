@@ -388,6 +388,20 @@ h3 {
     font-size:          90%;
 }
 
+
+/* ACTIVITY */
+
+#activity h3 {
+    margin:             0;
+    color:              black;
+    font-size:          80%;
+}
+
+#activity p {
+    font-size:          80%;
+    color:              #999;
+    text-align:         right;
+}
 /* MEDIA QUERIES */
 
 @media screen and (max-width: 800px) {
