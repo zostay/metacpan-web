@@ -1,0 +1,27 @@
+<form action="/search" id = "header_search">
+<div>
+    <a href="/" title = "Home">
+        <img src="/static/images/cpan_banner.png" alt="CPAN Logo">
+    </a>
+    <input id    = "keywords" type="text" name="q"
+           value = "<% req.param('q').join(' ') or req.parameters.lucky %>">
+    <button type="submit">
+        Search
+    </button>
+    <% PROCESS stats IF total.defined %>
+</div>
+</form>
+
+<% BLOCK stats %>
+    <div class = "search_stats">
+        <% IF page > 1 %>
+            Page <% page %> of
+        <% END %>
+        <%
+            total == 999  ? 'more than 999 results'
+          : total == 1    ? '1 result'
+          :                 total _ ' results';
+        %>
+        (<% took / 1000 %> seconds)
+</div>
+<% END %>
