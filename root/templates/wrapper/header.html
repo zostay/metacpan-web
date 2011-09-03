@@ -1,11 +1,10 @@
 <%-
 menu = [
-    { title = "Home",       path = ["/", "/search"] },
-    { title = "Recent",     path = ["/recent"] },
-    { title = "Mirrors",    path = ["/mirrors"] },
-    { title = "News",       path = ["http://blogs.perl.org/users/mo/"]},
-    { title = "FAQ",        path = ["https://github.com/CPAN-API/cpan-api/wiki/FAQ"] },
-    { title = "Feedback",   path = ["https://github.com/CPAN-API/metacpan-web/issues"] },
+    { name = "Home",       title = "MetaCPAN home page"         path = ["/", "/search"] },
+    { name = "Recent",     title = "Recent releases"            path = ["/recent"] },
+    { name = "Mirrors",    title = "CPAN mirrors"               path = ["/mirrors"] },
+    { name = "News",       title = "Recent changes to MetaCPAN" path = ["http://blogs.perl.org/users/mo/"]},
+    { name = "FAQ",        title = "FAQ"                        path = ["https://github.com/CPAN-API/cpan-api/wiki/FAQ"] },
 ]
 %>
 
@@ -29,8 +28,8 @@ menu = [
                 ) | none
             %>
         >
-            <a href = "<% item.path.0 %>">
-                <% item.title %>
+            <a href = "<% item.path.0 %>" title = "<% item.title %>">
+                <% item.name %>
             </a>
         </li>
     <% END %>
