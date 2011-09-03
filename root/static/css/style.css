@@ -51,7 +51,7 @@ table {
 caption,th,td {
     text-align: left;
     font-weight: normal;
-    float: none !important;
+    float: none;
 }
 
 table,th,td {
@@ -402,6 +402,46 @@ h3 {
     color:              #999;
     text-align:         right;
 }
+
+/* RELEASE TABLE */
+.releases {
+    width:              100%;
+    margin-bottom:      3%;
+    table-layout:       fixed;
+}
+
+.releases .odd {
+    background:         #F9F9F9;
+}
+
+.releases td {
+    vertical-align:     top;
+    padding:            0.2em 0.8em;
+    font-size:          95%;
+    overflow:           hidden;
+}
+
+.releases .name {
+    white-space:        nowrap;
+    width:              40%;
+}
+
+.releases .abstract {
+    white-space:        nowrap;
+    overflow:           hidden;
+}
+
+.releases .date {
+    white-space:        nowrap;
+    text-align:         right;
+    width:              8em;
+}
+
+/* RECENT RELEASES */
+#recent h2.date {
+    border-bottom:      1px dotted #e9e9e9;
+}
+
 /* MEDIA QUERIES */
 
 @media screen and (max-width: 800px) {
@@ -438,9 +478,53 @@ h3 {
         display:            block;
         font-size:          100%;
     }
+
+    .body {
+        border-width:       0;
+        margin-left:        0;
+    }
+
+    .side-bar {
+        margin-left:        0;
+        width:              100%;
+    }
+
+    .releases tr.blank {
+        display:            none;
+    }
+
+    .releases tr.odd {
+        background:         transparent;
+    }
+
+    .releases td.name,
+    .releases td.abstract,
+    .releases td.date {
+        display:            block;
+        margin:             0;
+        white-space:        normal;
+        width:              auto;
+    }
+
+    .releases td.name {
+        font-weight:        bold;
+        background:         #F9F9F9;
     }
 }
 
+@media screen and (min-width: 801px) {
+
+    .releases tr:not(.blank) .name:hover,
+    .releases tr:not(.blank) .abstract:hover {
+        position:           absolute;
+        background:         white;
+        outline:            2px solid #eee;
+        overflow:           visible;
+        white-space:        normal;
+        width:              30%;
+    }
+
+}
 
 
 /*

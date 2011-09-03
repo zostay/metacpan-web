@@ -1,20 +1,51 @@
-<table class="release-table author-table<% IF tablesorter %> tablesorter remote<% END %>">
+<%
+    IF releases.size == 0;
+        RETURN;
+    END;
+%>
+<table class="releases<% IF tablesorter %> tablesorter remote<% END %>">
 <%- IF header %>
     <thead>
-    <tr>
-    <th class="name">Release</th>
-    <th class="abstract">Abstract</th>
-    <th class="date">Date</th>
-    </tr>
-</thead>
+        <tr>
+            <th class="name">Release</th>
+            <th class="abstract">Abstract</th>
+            <th class="date">Date</th>
+        </tr>
+    </thead>
 <%- END %>
-<tbody>
-<% i = 0; FOREACH release IN releases %>
-<tr<% i = i + 1; IF i % 2 %> class="odd"<% END %>>
-  <td class="name"><strong><a href="/release/<% IF release.status == 'latest'; release.distribution; ELSE; release.author; '/'; release.name; END %>" class="ellipsis" style="width: 260px" title="<% release.author; '/'; release.name %>"><% release.name %></a></strong></td>
-  <td class="abstract"><% IF release.abstract; release.abstract; END %></td>
-  <td class="date" nowrap="nowrap"><span class="relatize" sort="<% release.date.dt_http %>"><% release.date.dt_http %></span></td>
-</tr>
-<% END %>
-</tbody>
+    <tbody>
+        <tr class="blank">
+            <td class="name"></td>
+            <td class="abstract"></td>
+            <td class="date"></td>
+        </tr>
+<%
+    i = 0;
+    FOREACH release IN releases
+        i     = i + 1;
+        class = i % 2 ? 'class="odd"' : '';
+        title = release.author _ '/' _  release.name;
+        href  = release.status == 'latest'
+              ? release.distribution
+              : title;
+%>
+    <tr <% class | none %>>
+        <td class="name">
+            <a href="/release/<% href %>" title="<% title %>" class="ellipsis">
+                <% release.name %>
+            </a>
+        </td>
+        <td class="abstract">
+            <% IF release.abstract; release.abstract; '&nbsp;' | none; END %>
+        </td>
+        <td class="date">
+            <span class="relatize" sort="<% release.date.dt_http %>">
+                <% release.date.dt_http %>
+            </span>
+        </td>
+    </tr>
+<%
+    END
+%>
+    </tbody>
 </table>

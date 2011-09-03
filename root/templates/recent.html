@@ -1,24 +1,43 @@
-<%- rss = 'recent' %>
-<div class="search-bar">
-  <% INCLUDE inc/activity.html %>
+<%-
+    rss = 'recent';
+    MoY = [
+        undef,
+        'January', 'February', 'March',     'April',   'May',       'June',
+        'July',    'August',   'September', 'October', 'November', 'December'
+    ];
+
+%>
+
+<div id = "recent" class = "body">
+    <h1> Recent releases </h1>
+    <div class="side-bar">
+      <% INCLUDE inc/activity.html %>
+    </div>
+
+<%-
+    releases = [];
+    FOREACH release IN recent;
+        date = release.date.dt;
+        day = "%d %s, %s".sprintf(date.day, MoY.item(date.month), date.year);
+        IF day != last;
+            INCLUDE inc/release-table.html
+                    releases = releases;
+            releases = [];
+            PROCESS date;
+            last = day;
+        END;
+        releases.push(release);
+    END;
+
+    INCLUDE inc/release-table.html releases = releases;
+    INCLUDE inc/pager.html size = 100;
+%>
+    <div class="clear"></div>
+
 </div>
 
-<div class="content">
-<%-
-MoY = [undef, 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-releases = [];
-FOREACH release IN recent;
-date = release.date.dt;
-day = "%d %s, %s".sprintf(date.day, MoY.item(date.month), date.year);
-IF day != last;
-INCLUDE inc/release-table.html releases = releases;
-releases = [];
-IF !loop.first %><br><% END %><big><strong class="recent-date"><% day; last = day %></strong></big>
-<%
-END;
-releases.push(release);
--%>
+<% BLOCK date %>
+    <h2 class = "date">
+        <% day %>
+    </h2>
 <% END %>
-<% INCLUDE inc/release-table.html releases = releases %>
-<% INCLUDE inc/pager.html size = 100 %>
-</div>
