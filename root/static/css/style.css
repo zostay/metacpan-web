@@ -192,7 +192,7 @@ a:hover {
 /* FOOTER */
 #footer {
     text-align:         center;
-    margin:             1% 0 1.5%;
+    margin:             1% 0 2%;
 }
 
 #footer li {
@@ -207,7 +207,7 @@ a:hover {
 }
 
 #hosting img {
-    width:              80%;
+    width:              40%;
     min-width:          20px;
     max-width:          150px;
     margin:             0.5%;
@@ -281,6 +281,32 @@ a:hover {
     color:              #aaa;
     font-size:          90%;
 }
+
+/* MEDIA QUERIES */
+
+@media screen and (max-width: 800px) {
+    .navbar a {
+        padding:            0.2em 0.3em;
+    }
+
+    #github_issue {
+        margin-right:       0.3em;
+    }
+
+    #github_issue br {
+        display:            none;
+    }
+
+    #home_search #logo img {
+        margin-left:    0;
+    }
+    #home_search #logo span {
+        display:        block;
+        font-size:      100%;
+    }
+}
+
+
 
 /*
 
