@@ -1,14 +1,43 @@
-<%- USE pager = Page(size, page); pager.total_entries(total); IF pager.last_page > 1 %>
-<div class="pager">
-<%- IF pager.previous_page %>
- <a href="<% c.req.uri_with( p = pager.previous_page ) %>"><strong>Previous</strong></a>&nbsp;&nbsp;&nbsp;
-<% END %>
-<% FOREACH p IN [page - 10 .. [page + 10, pager.last_page].nsort.0 ];
-IF p < 1; NEXT; END;
-IF p == page %><strong><% p %></strong><% ELSE %>
-<a href="<% c.req.uri_with( p = p ) %>"><% p %></a> <% END; END %>
-<% IF pager.next_page %>&nbsp;&nbsp;&nbsp;
-  <a href="<% c.req.uri_with( p = pager.next_page ) %>"><strong>Next</strong></a>
-<% END %>
-</div>
+<%-
+    USE pager = Page(size, page);
+    pager.total_entries(total);
+    IF pager.last_page > 1
+%>
+<ul class="pager">
+<%-
+    IF pager.previous_page
+%>
+        <li class = "prev">
+            <a href  = "<% c.req.uri_with( p = pager.previous_page ) %>"
+               title = "Previous page">Previous</a>
+       </li>
+<%
+    END;
+
+    FOREACH p IN [page - 10 .. [page + 10, pager.last_page].nsort.0 ];
+        IF p < 1; NEXT; END;
+        IF p == page;
+%>
+        <li class="current"><% p %></li>
+<%
+        ELSE
+%>
+        <li>
+            <a href  = "<% c.req.uri_with( p = p ) %>"
+               title = "Page <% p %>"><% p %></a>
+       </li>
+<%
+        END;
+    END;
+
+    IF pager.next_page;
+%>
+        <li class = "next">
+            <a href  = "<% c.req.uri_with( p = pager.next_page ) %>"
+               title = "Next page">Next</a>
+       </li>
+<%
+    END
+%>
+</ul>
 <% END %>

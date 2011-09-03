@@ -120,6 +120,35 @@ a:hover {
     font-weight:        bold;
 }
 
+/* PAGER */
+
+.pager {
+    display:            block;
+    text-align:         center;
+    list-style:         none;
+    margin:             0;
+    padding:            0;
+}
+
+.pager li {
+    display:            inline-block;
+    padding:            0.2em;
+}
+
+.pager .prev,
+.pager .next,
+.pager .current {
+    font-weight:        bold;
+}
+
+.pager .prev {
+    margin-right:       1em;
+}
+
+.pager .next {
+    margin-left:        1em;
+}
+
 /* HEADER */
 
 #header {
