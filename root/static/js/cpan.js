@@ -131,32 +131,34 @@ $(document).ready(function() {
         }
     });
 
-    $("#search-input").autocomplete('/search/autocomplete', {
-        dataType: 'json',
-        delay: 100,
-        max: 20,
-        selectFirst: false,
-        width: $("#search-input").innerWidth(),
-        parse: function(data) {
-            var result = $.map(data, function(row) {
-                return {
-                    data: row,
-                    value: row.documentation,
-                    result: row.documentation
-                }
-            });
-            var uniq = {};
-            result = $.grep(result, function(row) {
-                uniq[row.result] = typeof(uniq[row.result]) == 'undefined' ? 0 : uniq[row.result];
-                return uniq[row.result]++ < 1;
-            });
-            return result;
-        },
-        formatItem: function(item) {
-            return item.documentation;
-        }
-    }).result(function(e, item) {
-        document.location.href = '/module/'+ item.documentation;
+    $("#search-input").focus(function() {
+        $(this).autocomplete('/search/autocomplete', {
+            dataType: 'json',
+            delay: 100,
+            max: 20,
+            selectFirst: false,
+            width: $("#search-input").innerWidth(),
+            parse: function(data) {
+                var result = $.map(data, function(row) {
+                    return {
+                        data: row,
+                        value: row.documentation,
+                        result: row.documentation
+                    }
+                });
+                var uniq = {};
+                result = $.grep(result, function(row) {
+                    uniq[row.result] = typeof(uniq[row.result]) == 'undefined' ? 0 : uniq[row.result];
+                    return uniq[row.result]++ < 1;
+                });
+                return result;
+            },
+            formatItem: function(item) {
+                return item.documentation;
+            }
+        }).result(function(e, item) {
+            document.location.href = '/module/'+ item.documentation;
+        });
     });
 
     $('#search-input.autofocus').focus();
