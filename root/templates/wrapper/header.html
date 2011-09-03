@@ -1,0 +1,59 @@
+<%-
+menu = [
+    { title = "Home",       path = ["/", "/search"] },
+    { title = "Recent",     path = ["/recent"] },
+    { title = "Mirrors",    path = ["/mirrors"] },
+    { title = "News",       path = ["http://blogs.perl.org/users/mo/"]},
+    { title = "FAQ",        path = ["https://github.com/CPAN-API/cpan-api/wiki/FAQ"] },
+    { title = "Feedback",   path = ["https://github.com/CPAN-API/metacpan-web/issues"] },
+]
+%>
+
+<ul id = "header" class="navbar">
+    <li class = "account">
+        <%- IF user_exists %>
+            <a href="/account/profile" title = "Account settings">
+                <img src="/static/icons/settings.png" width=16 alt = "Account settings">
+                Welcome
+            </a>
+        <%- ELSE %>
+            <a href="#" class="signin" onclick="this.id='foo'">Sign in</a>
+            <% PROCESS auth_options %>
+        <% END %>
+    </li>
+    <% FOREACH item IN menu %>
+        <li <%
+                (item.path.grep(->{ this == req.uri.path} ).size
+                    ? 'class="current"'
+                    : ''
+                ) | none
+            %>
+        >
+            <a href = "<% item.path.0 %>">
+                <% item.title %>
+            </a>
+        </li>
+    <% END %>
+</ul>
+
+<script type="text/javascript">
+   // Workaround for android absolute positioning hover bug
+   // http://code.google.com/p/android/issues/detail?id=6721
+   $(function() {
+       $('#header .signin').click(function(){
+           this.id = 'dummmy_signin';
+           this.id = ''
+       })
+   });
+</script>
+
+<% BLOCK auth_options %>
+<ul id="auth_options">
+    <% FOREACH identity IN ['Facebook', 'GitHub', 'Twitter'] %>
+        <li>
+            <a href = "<% api_secure %>/oauth2/authorize?choice=<% identity.lower %>&amp;client_id=<% c.config.consumer_key %>"
+                ><% identity %></a>
+        </li>
+    <% END %>
+</ul>
+<% END %>

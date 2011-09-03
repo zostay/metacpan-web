@@ -1,28 +1,3 @@
-<%- menu = [{
-  title = "Home",
-  path = ["/", "/search"]
-},
-{
-  title = "Recent",
-  path = ["/recent"]
-},
-{
-  title = "Mirrors",
-  path = ["/mirrors"]
-},
-{
-  title = "News",
-  path = ["http://blogs.perl.org/users/mo/"]
-},
-{
-  title = "FAQ",
-  path = ["https://github.com/CPAN-API/cpan-api/wiki/FAQ"]
-},
-{
-  title = "Feedback",
-  path = ["https://github.com/CPAN-API/metacpan-web/issues"]
-},
-] %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -42,21 +17,7 @@
     <script src="<% req.env.item('psgix.assets').0 %>" type="text/javascript"></script>
 </head>
 <body>
-  <div class="header">
-    <% FOREACH item IN menu; bold = item.path.grep(->{ this == req.uri.path} ).size;
-    IF bold; '<strong>' | none; END %><a href="<% item.path.0 %>"><% item.title %></a><% IF bold; '</strong>' | none; END; END %>
-    <%- IF user_exists %>
-    <a class="settings" href="/account/profile"><img src="/static/icons/settings.png" width=16></a>
-    <div class="spacer" style="text-align: right"><strong>Welcome</strong></div>
-    <%- ELSE %>
-    <div class="spacer" style="text-align: right"><strong id="signin-button">Sign in</strong></div>
-  </div>
-  <div id="signin" style="display: none; position: absolute; right: 2px; top: 0px">
-      <div style="border-color: #CCC #999 #fff #CCC; border-width: 1px; border-style: solid; position: relative; top: 1px; background-color: #fff; width: 50px; left: 30px; padding: 5px; text-align: right"><strong>Sign in</strong></div>
-         <div class="ds"><div style="border-color: #CCC #999 #999 #CCC; border-width: 1px; border-style: solid; background-color: #fff; width: 80px;  padding: 5px;"><% FOREACH identity IN ['Facebook', 'GitHub', 'Twitter'] %>
-             <a href="<% api_secure %>/oauth2/authorize?choice=<% identity.lower %>&amp;client_id=<% c.config.consumer_key %>" onclick="return logInPAUSE(this)"><% identity %></a><% END %>
-          </div></div><% END %>
-  </div>
+    <% INCLUDE wrapper/header.html %>
 <div style="float: right; text-align: right; padding-right: 5px; margin-top: -15px"><a href="https://github.com/CPAN-API/metacpan-web/issues/new"><small>Problem?<br>Open an issue!</small></a></div>
   <% IF req.uri.path != '/' %>
   <div style="text-align: center" class="home">
