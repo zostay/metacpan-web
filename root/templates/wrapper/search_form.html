@@ -4,7 +4,7 @@
         <img src="/static/images/cpan_banner.png" alt="CPAN Logo">
     </a>
         <div>
-            <input id    = "keywords" type="text" name="q"
+            <input id    = "search-input" type="text" name="q"
                    value = "<% req.param('q').join(' ') or req.parameters.lucky %>"
             ><button type="submit">
                 Search
