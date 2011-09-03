@@ -18,7 +18,7 @@
 </head>
 <body>
     <% INCLUDE wrapper/header.html %>
-<div style="float: right; text-align: right; padding-right: 5px; margin-top: -15px"><a href="https://github.com/CPAN-API/metacpan-web/issues/new"><small>Problem?<br>Open an issue!</small></a></div>
+    <% INCLUDE wrapper/github_issue.html %>
   <% IF req.uri.path != '/' %>
   <div style="text-align: center" class="home">
     <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
