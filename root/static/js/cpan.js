@@ -136,7 +136,7 @@ $(document).ready(function() {
         delay: 100,
         max: 20,
         selectFirst: false,
-        width: $("#search-input").width() + 5,
+        width: $("#search-input").innerWidth(),
         parse: function(data) {
             var result = $.map(data, function(row) {
                 return {
