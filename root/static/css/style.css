@@ -130,6 +130,9 @@ a:hover {
     text-align:         right;
     font-size:          95%;
 }
+
+#header > li {
+    margin-bottom:      -1px;
 }
 
 #header > li > a:hover {
