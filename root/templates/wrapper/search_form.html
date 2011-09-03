@@ -1,16 +1,18 @@
-<form action="/search" id = "header_search">
-<div>
-    <a href="/" title = "Home">
+<div id = "header_search">
+    <form action="/search" id = "header_search">
+    <a href="/" title = "MetaCPAN home page">
         <img src="/static/images/cpan_banner.png" alt="CPAN Logo">
     </a>
-    <input id    = "keywords" type="text" name="q"
-           value = "<% req.param('q').join(' ') or req.parameters.lucky %>">
-    <button type="submit">
-        Search
-    </button>
-    <% PROCESS stats IF total.defined %>
+        <div>
+            <input id    = "keywords" type="text" name="q"
+                   value = "<% req.param('q').join(' ') or req.parameters.lucky %>"
+            ><button type="submit">
+                Search
+            </button>
+            <% PROCESS stats IF total.defined %>
+        </div>
+    </form>
 </div>
-</form>
 
 <% BLOCK stats %>
     <div class = "search_stats">

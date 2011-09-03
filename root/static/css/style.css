@@ -125,7 +125,7 @@ a:hover {
 #header {
     border-bottom:      1px solid #ccc;
     margin-bottom:      1.5em;
-    background:         -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(255, 255, 255) ),to(rgb(245, 245, 245) ) );
+    background:         -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(255, 255, 255)),to(rgb(245, 245, 245) ) );
     background:         -moz-linear-gradient(rgb(255, 255, 255), rgb(245, 245, 245) );
     text-align:         right;
     font-size:          95%;
@@ -187,10 +187,67 @@ a:hover {
     float:              none;
 }
 
+
+/* HEADER SEARCH */
+#header_search {
+    margin:             0 auto 2%;
+    width:              80%;
+    text-align:         center;
+    max-width:          800px;
+}
+
+#header_search form {
+    display:            block;
+    margin:             0 0 0 15%;
+    width:              80%;
+}
+
+#header_search form div {
+    width:              100%;
+}
+
+#header_search a img {
+    height:             3.6em;
+    vertical-align:     middle;
+    margin:             -0.8em 0 0 -13em;
+    float:              left;
+}
+
+#header_search button,
+#header_search input {
+    width:              70%;
+    float:              left;
+    margin-bottom:      1%;
+    border:             1px solid #bbb;
+    box-shadow:         2px 2px 2px #eee;
+    font-size:          130%;
+    padding:            0.15em 0.3em;
+    border-radius:      3px 0 0 3px;
+}
+
+#header_search button {
+    width:              auto;
+    margin-left:        -1px;
+    float:              left;
+    font-size:          120%;
+    padding:            0.2em 0.3em;
+    background:         -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(255, 255, 255) ), to(rgb(221, 221, 221) ) );
+    background:         -moz-linear-gradient(#fff, rgb(221, 221, 221) );
+    color:              #333;
+    border-radius:      0 3px 3px 0;
+}
+
+#header_search .search_stats {
+    clear:              left;
+    font-size:          80%;
+    color:              #aaa;
+    text-align:         left;
+}
+
 /* GITHUB ISSUE */
 #github_issue {
     font-size:          80%;
-    margin:             -1.5em 0.8em 0.5em;
+    margin:             -1.5em 0.8em 0;
     text-align:         right;
 }
 
@@ -293,6 +350,20 @@ a:hover {
         padding:            0.2em 0.3em;
     }
 
+    #header_search form {
+        margin:             0;
+        width:              100%;
+    }
+
+    #header_search form > div {
+        clear:              both;
+    }
+
+    #header_search a img {
+        margin:             0 0 1% 0;
+        height:             2.5em;
+    }
+
     #github_issue {
         margin-right:       0.3em;
     }
@@ -302,11 +373,12 @@ a:hover {
     }
 
     #home_search #logo img {
-        margin-left:    0;
+        margin-left:        0;
     }
     #home_search #logo span {
-        display:        block;
-        font-size:      100%;
+        display:            block;
+        font-size:          100%;
+    }
     }
 }
 
