@@ -4,6 +4,7 @@
     <title>
         <% title || 'Search the CPAN'; %> - metacpan.org
     </title>
+    <meta name="viewport" content="initial-scale=1.0,width=device-width" />
     <% IF rss %>
         <link rel="alternate" type="application/rss+xml" title="RSS" href="http://metacpan.org/feed/<% rss %>" />
     <% END %>
@@ -20,10 +21,9 @@
     <% INCLUDE wrapper/header.html %>
     <% INCLUDE wrapper/github_issue.html %>
     <% INCLUDE wrapper/search_form.html UNLESS req.uri.path == '/';%>
-  <br>
-  <div id="content"><% content | none %>
-  </div>
-  <br><br><br>
+    <div id="content">
+        <% content | none %>
+    </div>
     <% PROCESS wrapper/footer.html %>
     <% PROCESS wrapper/piwi_tracking.html %>
   </body>

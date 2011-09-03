@@ -1,13 +1,5 @@
-/* --------------------------------------------------------------
-
-   reset.css
-   * Resets default browser CSS.
-
--------------------------------------------------------------- */
-button::-moz-focus-inner,
-input[type="text"]::-moz-focus-inner,
-input[type="submit"]::-moz-focus-inner,
-input[type="reset"]::-moz-focus-inner
+/* --- BROWSER RESET --- */
+button::-moz-focus-inner,input[type="text"]::-moz-focus-inner,input[type="submit"]::-moz-focus-inner,input[type="reset"]::-moz-focus-inner
     {
     margin-top: -1px !important;
 }
@@ -32,6 +24,7 @@ body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,ad
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
+    font-family: sans-serif;
 }
 
 /* This helps to make newer HTML5 elements behave like DIVs in older browers */
@@ -84,14 +77,146 @@ a img {
     outline: 0;
 }
 
-button,body {
-    font-family: Arial, Helvetica, sans-serif;
-}
 
 body {
-    margin: 0px;
-    padding: 0px;
-    font-size: 0.8em;
+    margin:             0;
+    padding:            0;
+    font-size:          85%;
+}
+
+a {
+    color:              #3366CC;
+    text-decoration:    none;
+}
+
+a:hover {
+    color:              #3366CC;
+    text-decoration:    underline;
+}
+
+/* NAVBARS */
+.navbar {
+    display:            inline-block;
+    list-style:         none;
+    width:              100%;
+    margin:             0;
+    padding:            0;
+    position:           relative;
+}
+
+.navbar li {
+    float:              left;
+    margin:             0;
+    padding:            0;
+}
+
+.navbar a {
+    display:            block;
+    padding:            0.4em 0.6em;
+}
+
+.navbar .current a {
+    color:              black;
+    font-weight:        bold;
+}
+
+/* HEADER */
+
+#header {
+    border-bottom:      1px solid #ccc;
+    margin-bottom:      1.5em;
+    background:         -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(255, 255, 255) ),to(rgb(245, 245, 245) ) );
+    background:         -moz-linear-gradient(rgb(255, 255, 255), rgb(245, 245, 245) );
+    text-align:         right;
+}
+
+#header > li > a:hover {
+    background:         -webkit-gradient(linear, 0% 0%, 0% 100%, from(#DAF3FF), to(#CAE3FA) );
+    background:         -moz-linear-gradient(#DAF3FF, #CAE3FA);
+    text-decoration:    none;
+}
+
+
+#header .account {
+    float:              right;
+    border:             1px solid transparent;
+    border-top-width:   0;
+    text-align:         right;
+    width:              6em;
+}
+
+#header .signin {
+    font-weight:        bold;
+    text-align:         right;
+}
+
+#header .signin:hover {
+    cursor:             default;
+    text-decoration:    none;
+    background:         transparent;
+}
+
+#auth_options {
+    display:            none;
+    list-style:         none;
+    background:         white;
+    border:             1px solid #ccc;
+    border-top-width:   0;
+    right:              0;
+    z-index:            1000;
+}
+
+#header .account:hover {
+    border-color:       white #ccc #ccc;
+    text-decoration:    none;
+    background:         white;
+}
+
+.account:hover #auth_options {
+    position:           absolute;
+    display:            block;
+}
+
+#auth_options li {
+    width:              6em;
+    float:              none;
+}
+
+/* GITHUB ISSUE */
+#github_issue {
+    font-size:          80%;
+    margin:             -1.5em 0.8em 0.5em;
+    text-align:         right;
+}
+
+/* FOOTER */
+#footer {
+    text-align:         center;
+    margin:             1% 0 1.5%;
+}
+
+#footer li {
+    display:            inline-block;
+    float:              none;
+}
+
+#hosting {
+    text-align:center;
+    font-size:          80%;
+    color:              #ccc;
+}
+
+#hosting img {
+    width:              80%;
+    min-width:          20px;
+    max-width:          150px;
+    margin:             0.5%;
+}
+
+/*
+
+button,body {
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 legend {
@@ -734,3 +859,5 @@ div.qtip-github table th {
 .rating-50 {
     background-position: 0px -190px;
 }
+
+*/
