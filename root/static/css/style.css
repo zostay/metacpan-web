@@ -553,19 +553,6 @@ p {
     }
 }
 
-@media screen and (min-width: 801px) {
-
-    .releases tr:not(.blank) .name:hover,
-    .releases tr:not(.blank) .abstract:hover {
-        position:           absolute;
-        background:         white;
-        outline:            2px solid #eee;
-        overflow:           visible;
-        white-space:        normal;
-        width:              30%;
-    }
-
-}
 
 
 /*
