@@ -526,10 +526,14 @@ p {
         width:              100%;
     }
 
-    .releases tr.blank {
-        display:            none;
+    .releases,
+    .releases thead,
+    .releases tbody,
+    .releases tr,
+    .releases {
+        width:              100%;
+        display:            block;
     }
-
     .releases tr.odd {
         background:         transparent;
     }
