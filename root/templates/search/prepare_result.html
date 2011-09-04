@@ -1,0 +1,26 @@
+<%
+    author       = item.author;
+    author_href  = ['author',author];
+    path         = item.path;
+    document     = item.documentation;
+
+    release      = item.release;
+    release_href = item.status == 'latest'
+                 ? ['release', item.distribution]
+                 : ['release', author, release ];
+
+    IF document;
+        name = document;
+        href = item.status == 'latest'
+             ? ['module', document]
+             : ['module', author, release, path];
+     ELSE;
+        name = path;
+        href = ['source', author, release, path];
+    END;
+
+    IF (abstract = item.abstract);
+        abstract = ' - ' _ abstract;
+    END;
+
+%>

@@ -1,0 +1,29 @@
+<%
+    IF results.size;
+%>
+        <ul class = "results">
+<%
+        FOREACH group IN results;
+%>
+            <li>
+<%
+                item = group.shift;
+                PROCESS search/prepare_result.html;
+                PROCESS search/main_result.html;
+
+                IF group.size;
+                    PROCESS search/other_results.html;
+                END;
+%>
+            </li>
+<%
+        END;
+%>
+        </ul>
+<%
+    ELSE;
+%>
+        <h2>No results found</h2>
+<%
+    END
+%>

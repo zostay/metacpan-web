@@ -1,0 +1,48 @@
+<%
+
+    rating       = (item.rating.mean * 2).fmt('%.0f') / 2 * 10;
+
+    IF rating;
+        rating_href  = "http://cpanratings.perl.org/dist/" _ item.distribution;
+        reviews      = item.rating.count;
+        IF reviews;
+            reviews = reviews
+                      _ (reviews > 1 ? ' reviews' : ' review' );
+        END;
+    END;
+%>
+
+<h2>
+    <a href="/<% href.join('/') %>"><% name %></a>
+    <% abstract %>
+    <% INCLUDE inc/favorite.html module = item %>
+</h2>
+
+<% IF item.description %>
+    <p class = "snippet">
+        <% item.description.chunk(250).0 _ '...' %>
+    </p>
+<% END %>
+
+<div class = "dist_info">
+    <a href="/<% author_href.join('/') %>"
+        ><% author %>
+    </a>
+    <a href="/<% release_href.join('/') %>">
+        /<% release %>
+    </a>
+
+    <%- IF rating %>
+        <div class="rating-<% rating %>"></div>
+        (<a href="<% rating_href %>"><% reviews %></a>)
+    <%- END %> -
+
+    <span class="relatize">
+        <% item.date.dt_http %>
+    </span>
+    -
+
+    <a href="/search?q=distribution:<% item.distribution %>+<% query %>">
+        Search in distribution
+    </a>
+</div>

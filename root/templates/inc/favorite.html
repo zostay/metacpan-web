@@ -1,11 +1,45 @@
-<% IF user_exists -%>
-<form action="/account/favorite/add" style="display: inline" onsubmit="return favDistribution(this)">
-    <% IF module.myfavorite %><input type="hidden" name="remove" value="1"><% END -%>
-    <input type="hidden" name="release" value="<% module.release || module.name %>">
-    <input type="hidden" name="author" value="<% module.author %>">
-    <input type="hidden" name="distribution" value="<% module.distribution %>">
-<button type="submit" class="favorite<% IF module.favorites %> highlight<% END %><% IF module.myfavorite %> active<% END %>"><span><% module.favorites %></span> ++</button>
-</form>
-<% ELSE -%>
-<a href="" onclick="alert('Please sign in to add favorites'); return false" class="favorite<% IF module.favorites %> highlight<% END %>"><span">
-<% module.favorites %> ++</a><% END -%>
+<%
+    class = module.favorites ? 'highlight' : '';
+    count = module.favorites || '';
+    title = SWITCH count;
+                CASE ''; "Be the first to like this release";
+                CASE 1 ; "One person likes this release";
+                CASE   ; count _ "people like this release";
+            END;
+
+    IF user_exists;
+        type = 'submit';
+%>
+    <form action="/account/favorite/add" onsubmit="return favDistribution(this)">
+<%
+        IF module.myfavorite;
+            class = class _ ' active';
+%>
+            <input type="hidden" name="remove" value="1">
+<%
+        END
+-%>
+        <input type="hidden" name="release"      value="<% module.release || module.name %>">
+        <input type="hidden" name="author"       value="<% module.author %>">
+        <input type="hidden" name="distribution" value="<% module.distribution %>">
+
+        <% PROCESS button %>
+    </form>
+<%
+    ELSE;
+        click = 1;
+        type  = 'button';
+        PROCESS button;
+    END;
+-%>
+
+<% BLOCK button %>
+    <button type  = "<% type %>"
+            class = "favorite <% class %>"
+            title = "<% title %>"
+            <% IF click %>
+                onclick = "alert('Please sign in to add favorites'); return false"
+            <% END %>
+    ><% count %>++</button>
+<% END %>
+

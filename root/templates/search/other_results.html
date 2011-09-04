@@ -1,0 +1,27 @@
+<ul class="search-group">
+<%
+    FOREACH item IN group;
+        PROCESS search/prepare_result.html;
+%>
+        <li>
+            <a href="/<% href.join('/') %>"
+                ><% name %></a>
+            <% abstract %>
+        </li>
+<%
+        IF loop.index == 2; LAST; END
+    END;
+
+    more = group.size - 3;
+    IF more > 0;
+        more = more _ (more > 1 ? ' more results' : ' more result');
+%>
+        <li>
+            <a href="/search?q=distribution:<% item.distribution %>+<% query %>">
+                <% more %>  from <% item.distribution %> »
+            </a>
+        </li>
+<%
+    END
+%>
+</ul>

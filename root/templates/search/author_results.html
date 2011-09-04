@@ -1,0 +1,22 @@
+<div id="author-results">
+    <ul class="authors">
+<%
+    FOREACH author IN authors.results
+%>
+        <li>
+            <a href  = "/author/<% author.id %>"
+               title = "Author page for <% author.name %>"
+                >
+                <% IF author.gravatar_url %>
+                    <img src   = "<% author.gravatar_url %>"
+                         class = "author-img"
+                         alt   = "<% author.name %>">
+                <% END %>
+                <% author.name %> (<% author.pauseid %>)
+            </a>
+        </li>
+<%
+    END
+%>
+    </ul>
+</div>
