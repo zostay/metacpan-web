@@ -544,6 +544,46 @@ button.favorite.active {
     font-size:          95%;
 }
 
+/* AUTHOR RESULTS */
+#author-results ul {
+    display:            inline-block;
+    margin:             2% 0;
+}
+
+#author-results li {
+    float:              left;
+    width:              25%;
+    max-width:          100px;
+    padding:            5px 5px 5px 45px;
+    margin-right:       10px;
+    border:             1px solid white;
+    overflow:           hidden;
+    height:             50px;
+    font-size:          90%;
+}
+
+#author-results li:hover {
+    border:             1px solid #eee;
+    border-radius:      3px;
+    box-shadow:         3px 3px 5px #eee;
+}
+
+#author-results a {
+    display:            block;
+}
+
+#author-results a:hover {
+    text-decoration:    none;
+}
+
+#author-results img {
+    width:              30px;
+    height:             30px;
+    margin-left:        -40px;
+    float:              left;
+}
+
+
 /* RATINGS */
 
 
@@ -672,6 +712,11 @@ button.favorite.active {
     .releases td.name {
         font-weight:        bold;
         background:         #F9F9F9;
+    }
+
+
+    #author-results li {
+        font-size:          80%;
     }
 }
 
