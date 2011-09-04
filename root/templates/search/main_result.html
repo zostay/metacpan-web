@@ -3,7 +3,7 @@
     rating       = (item.rating.mean * 2).fmt('%.0f') / 2 * 10;
 
     IF rating;
-        rating_href  = "http://cpanratings.perl.org/dist/" _ item.distribution;
+        rating_href  = "http://cpanratings.perl.org/dist/" _ dist;
         reviews      = item.rating.count;
         IF reviews;
             reviews = reviews
@@ -14,7 +14,7 @@
 
 <h2>
     <a href="/<% href.join('/') %>"><% name %></a>
-    <% abstract %>
+    <% abstract -%>
     <% INCLUDE inc/favorite.html module = item %>
 </h2>
 
@@ -25,16 +25,16 @@
 <% END %>
 
 <div class = "dist_info">
-    <a href="/<% author_href.join('/') %>"
+    <a href="/<% author_href.join('/') %>" title="Author page for <% author %>"
         ><% author %>
     </a>
-    <a href="/<% release_href.join('/') %>">
+    <a href="/<% release_href.join('/') %>" title="Release page for <% release %>">
         /<% release %>
     </a>
 
     <%- IF rating %>
         <div class="rating-<% rating %>"></div>
-        (<a href="<% rating_href %>"><% reviews %></a>)
+        (<a href="<% rating_href %>" title="See reviews for <% dist %>"><% reviews %></a>)
     <%- END %> -
 
     <span class="relatize">
@@ -42,7 +42,7 @@
     </span>
     -
 
-    <a href="/search?q=distribution:<% item.distribution %>+<% query %>">
+    <a href="/search?q=distribution:<% dist %>+<% query %>" title = "Search within <% dist %>">
         Search in distribution
     </a>
 </div>

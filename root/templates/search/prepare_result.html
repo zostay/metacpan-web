@@ -9,6 +9,8 @@
                  ? ['release', item.distribution]
                  : ['release', author, release ];
 
+    dist         = item.distribution;
+
     IF document;
         name = document;
         href = item.status == 'latest'

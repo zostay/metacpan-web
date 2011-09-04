@@ -17,7 +17,7 @@
         more = more _ (more > 1 ? ' more results' : ' more result');
 %>
         <li>
-            <a href="/search?q=distribution:<% item.distribution %>+<% query %>">
+            <a href="/search?q=distribution:<% dist %>+<% query %>">
                 <% more %>  from <% item.distribution %> »
             </a>
         </li>
