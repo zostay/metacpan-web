@@ -2,9 +2,9 @@
     class = module.favorites ? 'highlight' : '';
     count = module.favorites || '';
     title = SWITCH count;
-                CASE ''; "Be the first to like this release";
-                CASE 1 ; "One person likes this release";
-                CASE   ; count _ "people like this release";
+                CASE ''; "Be the first to like " _ module.distribution;
+                CASE 1 ; "One person likes " _ module.distribution;
+                CASE   ; count _ " people like " _ module.distribution;
             END;
 
     IF user_exists;
@@ -42,4 +42,3 @@
             <% END %>
     ><% count %>++</button>
 <% END %>
-
