@@ -39,7 +39,7 @@ sub model {
 }
 
 sub request {
-    my ( $self, $orig_path, $search, $params ) = @_;
+    my ( $self, $orig_path, $search, $params, $timed ) = @_;
     my ( $token, $method ) = @$params{qw(token method)};
     my $path = $orig_path;
     $path .= "?access_token=$token" if ($token);
@@ -52,12 +52,15 @@ sub request {
         persistent => 1,
         sub {
         my ( $data, $headers ) = @_;
-        if (   $headers->{Status} == 596
-            && $headers->{Reason} eq 'Broken pipe' )
+        if ($headers->{Status} == 596
+            and (  $headers->{Reason} eq 'Broken pipe'
+                or $headers->{Reason} =~ /timed out/ and not $timed++ )
+            )
         {
-            my $cv = $self->request( $orig_path, $search, $params );
+            my $cv = $self->request( $orig_path, $search, $params, $timed );
             return $cv->cb( sub { $req->send( $cv->recv ) } );
         }
+
         my $content_type = $headers->{'content-type'} || '';
 
         if ( $content_type =~ /^application\/json/ ) {
