@@ -1,22 +1,23 @@
 <%- title = "Distributions which depend on " _ module %>
-<div class="search-bar">
-  <% INCLUDE inc/activity.html query = "requires=" _ module %>
-  <hr>
-  <strong>Index</strong>
-  <ul>
-    <a href=""><li>Latest</li></a>
-    <a href=""><li>CPAN</li></a>
-    <a href=""><li>BackPAN</li></a>
-  </ul>
+<div class = "body" id = "reverse-deps">
+    <h1><% title %></h1>
+    <div class="side-bar">
+      <% INCLUDE inc/activity.html  query = "requires=" _ module %>
+    </div>
+<%
+    IF data.size > 0;
+        INCLUDE inc/release-table.html
+            releases = data,
+            header = 1,
+            tablesorter = 1;
+        INCLUDE inc/pager.html
+            size = 50;
+    ELSE;
+%>
+       <h2>No modules depend on <% module %></h2>
+<%
+    END
+%>
 </div>
 
-<div class="content">
-<center><h1><strong>Distributions Which Depend on <%- module %> (Reverse Dependencies)</strong></h1></center>
-<% IF data.size > 0 %>
-<% INCLUDE inc/release-table.html releases = data, header = 1, tablesorter = 1 %>
-<% INCLUDE inc/pager.html size = 50 %>
-<% ELSE %>
-<big><strong>No depedants for <% module %> could be found</strong></big>
-<% END %>
-</div>
 <script>defaultSort = [[2,1]];</script>

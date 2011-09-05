@@ -689,6 +689,10 @@ button.favorite.active {
         margin:             0 0 1% 0;
     }
 
+    .releases {
+        clear:              both;
+    }
+
     .releases,
     .releases thead,
     .releases tbody,
@@ -699,6 +703,16 @@ button.favorite.active {
     }
     .releases tr.odd {
         background:         transparent;
+    }
+
+    .releases th.name,
+    .releases th.abstract,
+    .releases th.date {
+        width:              auto;
+        padding-right:      1.5em;
+        text-align:         left;
+        display:            inline-block;
+        margin-right:       0.5em;
     }
 
     .releases td.name,
