@@ -547,7 +547,8 @@ button.favorite.active {
 /* AUTHOR RESULTS */
 #author-results ul {
     display:            inline-block;
-    margin:             2% 0;
+    margin:             1% 0;
+    width:              100%;
 }
 
 #author-results li {
