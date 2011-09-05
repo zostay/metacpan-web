@@ -39,8 +39,9 @@ sub model {
 }
 
 sub request {
-    my ( $self, $path, $search, $params ) = @_;
+    my ( $self, $orig_path, $search, $params ) = @_;
     my ( $token, $method ) = @$params{qw(token method)};
+    my $path = $orig_path;
     $path .= "?access_token=$token" if ($token);
     my $req = $self->cv;
     http_request $method ? $method
@@ -51,6 +52,12 @@ sub request {
         persistent => 1,
         sub {
         my ( $data, $headers ) = @_;
+        if (   $headers->{Status} == 596
+            && $headers->{Reason} eq 'Broken pipe' )
+        {
+            my $cv = $self->request( $orig_path, $search, $params );
+            return $cv->cb( sub { $req->send( $cv->recv ) } );
+        }
         my $content_type = $headers->{'content-type'} || '';
 
         if ( $content_type =~ /^application\/json/ ) {
