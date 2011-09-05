@@ -87,18 +87,23 @@ $(document).ready(function() {
     }
 
     SyntaxHighlighter.highlight();
-    
+
     $('#signin-button').mouseenter(function(){$('#signin').show()});
     $('#signin').mouseleave(function(){$('#signin').hide()});
     if(typeof defaultSort == "undefined") defaultSort = [[0,0]];
-    $('.tablesorter').tablesorter({sortList: defaultSort, widgets: ['zebra'],textExtraction: function(node){
-        if(node.getAttribute('class') == 'date') {
-            var date = new Date(node.firstChild.getAttribute('sort'));
-            return date.getTime();
-        } else {
-            return node.innerHTML;
+    $('.tablesorter').tablesorter({
+        sortList: defaultSort,
+        widgets: ['zebra'],
+        textExtraction: function(node){
+            node = $(node);
+            if(node.hasClass('date')) {
+                var date = new Date(node.find('span').attr('sort'));
+                return date.getTime();
+            } else {
+                return node.html();
+            }
         }
-    }} );
+     } );
 
     $('.tablesorter.remote th.header').each(function() {
         $(this).unbind('click');
