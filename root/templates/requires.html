@@ -1,6 +1,11 @@
 <%- title = "Distributions which depend on " _ module %>
 <div class = "body" id = "reverse-deps">
-    <h1><% title %></h1>
+    <h1>
+        Distributions which depend on
+        <a href="/module/<% module %>">
+            <% module %>
+        </a>
+    </h1>
     <div class="side-bar">
       <% INCLUDE inc/activity.html  query = "requires=" _ module %>
     </div>
