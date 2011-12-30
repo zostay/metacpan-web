@@ -38,7 +38,6 @@ sub index : PathPart('release') : Chained('/') : Args {
     );
     $reqs = $self->recv_all($reqs);
     $self->stash_api_results($c, $reqs, $out);
-    $self->add_favorites_data($out, $reqs->{favorites}, $out);
 
     # shortcuts
     my ($root, $modules) = @{$reqs}{qw(root modules)};

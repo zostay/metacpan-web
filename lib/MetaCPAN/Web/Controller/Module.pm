@@ -35,7 +35,6 @@ sub index : PathPart('module') : Chained('/') : Args {
     );
     $reqs = $self->recv_all($reqs);
     $self->stash_api_results($c, $reqs, $data);
-    $self->add_favorites_data($data, $reqs->{favorites}, $data);
 
     my $hr = HTML::Restrict->new;
     $hr->set_rules(

@@ -9,7 +9,6 @@ use MetaCPAN::Web::Test;
 
 # Not all tests apply to all releases.
 my @optional = qw(
-    favorited
     home_page
     repository
     reviews
@@ -35,7 +34,7 @@ test_psgi app, sub {
         # release name different than just s/::/-/g
         { module => 'LWP::UserAgent', release => 'libwww-perl', repository => 0, home_page => 0 },
         # no optional tests
-        { module => 'CGI::Bus', home_page => 0, reviews => 0, repository => 0, favorited => 0 },
+        { module => 'CGI::Bus', home_page => 0, reviews => 0, repository => 0 },
     );
 
 foreach my $test ( @tests ) {
@@ -77,16 +76,6 @@ foreach my $test ( @tests ) {
 
         # TODO: latest version (should be where we already are)
         # TODO: author
-
-        # not in release-info.html but should be shown on both:
-
-        my $favs = '//*[contains(@class, "favorite")]';
-        $tx->like( $favs, qr/\+\+$/, 'tag for favorites (++)' );
-
-        optional_test favorited => sub {
-            ok(  $tx->find_value("$favs/span") > 0,
-                'dist has been marked as favorite' );
-        };
 
         # Info about a release (either the one we're looking at or the one the module belongs to)
 

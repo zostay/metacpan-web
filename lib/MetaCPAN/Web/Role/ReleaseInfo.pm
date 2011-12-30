@@ -6,16 +6,7 @@ use Moose::Role;
 
 # TODO: should some of this be in a separate (instantiable) model
 # so you don't have to keep passing $data?
-# then wouldn't have to pass favorites back in.
 # Role/API/Aggregator?, Model/APIAggregator/ReleaseInfo?
-
-# add favorites and myfavorite data into $main hash
-sub add_favorites_data {
-    my ( $self, $main, $favorites, $data ) = @_;
-    $main->{myfavorite} = $favorites->{myfavorites}->{ $data->{distribution} };
-    $main->{favorites}  = $favorites->{favorites}->{   $data->{distribution} };
-    return;
-}
 
 # TODO: should the api_requests be in the base controller role,
 # and then the default extras be defined in other roles?
@@ -26,9 +17,6 @@ sub api_requests {
 
     return {
         author     => $c->model('API::Author')->get( $data->{author} ),
-
-        favorites  => $c->model('API::Favorite')
-            ->get( $c->user_exists ? $c->user->id : undef, $data->{distribution} ),
 
         rating     => $c->model('API::Rating')->get( $data->{distribution} ),
 

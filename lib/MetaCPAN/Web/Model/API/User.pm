@@ -26,15 +26,4 @@ sub get_profile {
     $self->request( "/user/profile", undef, { token => $token } );
 }
 
-sub add_favorite {
-    my ( $self, $data, $token ) = @_;
-    $self->request( "/user/favorite", $data, { token => $token } );
-}
-
-sub remove_favorite {
-    my ( $self, $data, $token ) = @_;
-    $self->request( "/user/favorite/" . $data->{distribution},
-        undef, { method => 'DELETE', token => $token } );
-}
-
 1;

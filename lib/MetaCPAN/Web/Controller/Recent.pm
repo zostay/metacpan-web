@@ -16,10 +16,4 @@ sub index : Path {
     );
 }
 
-sub faves : Path('/recent/favorites') {
-    my ( $self, $c ) = @_;
-    $c->res->redirect( '/favorite/recent', 301 );
-    $c->detach;
-}
-
 1;

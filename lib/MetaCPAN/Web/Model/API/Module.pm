@@ -120,9 +120,8 @@ sub search_distribution {
     my @ids          = map { $_->{fields}->{id} } @{ $data->{hits}->{hits} };
     my $descriptions = $self->search_descriptions(@ids);
     my $ratings      = $self->model('Rating')->get(@distributions);
-    my $favorites    = $self->model('Favorite')->get( $user, @distributions );
-    $_ = $_->recv for ( $ratings, $favorites, $descriptions );
-    my $results = $self->_extract_results( $data, $ratings, $favorites );
+    $_ = $_->recv for ( $ratings, $descriptions );
+    my $results = $self->_extract_results( $data, $ratings, );
 
     map { $_->{description} = $descriptions->{results}->{ $_->{id} } }
         @{$results};
@@ -160,15 +159,14 @@ sub search_collapsed {
 
     @distributions = splice( @distributions, $from, 20 );
     my $ratings   = $self->model('Rating')->get(@distributions);
-    my $favorites = $self->model('Favorite')->get( $user, @distributions );
     my $results   = $self->model('Module')
         ->search( $query, $self->_search_in_distributions(@distributions) );
-    $_ = $_->recv for ( $ratings, $favorites, $results );
+    $_ = $_->recv for ( $ratings, $results );
 
     $took += max( grep {defined} $ratings->{took},
-        $results->{took}, $favorites->{took} )
+        $results->{took} )
         || 0;
-    $results = $self->_extract_results( $results, $ratings, $favorites );
+    $results = $self->_extract_results( $results, $ratings );
             $results = $self->_collapse_results($results);
     my @ids = map { $_->[0]->{id} } @$results;
     $data = {
@@ -226,7 +224,7 @@ sub search_descriptions {
 }
 
 sub _extract_results {
-    my ( $self, $results, $ratings, $favorites ) = @_;
+    my ( $self, $results, $ratings ) = @_;
     return [
         map {
             {
@@ -235,10 +233,6 @@ sub _extract_results {
                     score    => $_->{_score},
                     rating =>
                     $ratings->{ratings}->{ $_->{fields}->{distribution} },
-                    favorites =>
-                    $favorites->{favorites}->{ $_->{fields}->{distribution} },
-                    myfavorite => $favorites->{myfavorites}
-                    ->{ $_->{fields}->{distribution} },
             }
             } @{ $results->{hits}->{hits} }
     ];

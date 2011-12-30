@@ -40,7 +40,7 @@
     <a href="/source/<% [item.author, item.release, item.path].join("/") %>"><% item.path %></a>
     <% END -%>
      <% IF item.abstract; ' - '; item.abstract; END %>
-  </strong></big><% INCLUDE inc/favorite.html module = item %><br>
+  </strong></big><br>
   <% IF item.description %><p class="description"><% item.description.chunk(250).0 _ '...' %></p>
   <% END %>
   <a class="author" href="/author/<% item.author %>"><% item.author %></a><a href="/release/<% IF item.status == 'latest'; item.distribution; ELSE; item.author; '/'; item.release; END %>">/<% item.release %></a>
